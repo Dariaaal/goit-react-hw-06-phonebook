@@ -4,27 +4,34 @@ import CardList from "./phonebook/CardList";
 import initialContacts from "./phonebook/contacts.json";
 import Filter from "./phonebook/Filter";
 import { nanoid } from "nanoid";
+import { useDispatch, useSelector } from "react-redux";
+import { deleteContact, addContact, setFilter } from "../store/store";
 
-const useLocalStorage = (key, defaultValue) => {
-  const [state, setState] = useState(() => {
-    return JSON.parse(window.localStorage.getItem(key)) ?? defaultValue;  
-  })
+// const useLocalStorage = (key, defaultValue) => {
+//   const [state, setState] = useState(() => {
+//     return JSON.parse(window.localStorage.getItem(key)) ?? defaultValue;  
+//   })
 
-  return [state, setState]
-}
+//   return [state, setState]
+// }
 
 export default function App() {
-    const [contacts, setContacts] = useLocalStorage('contacts', initialContacts);
-     
-    const [filter, setFilter] = useState('');
     
-    useEffect(() => {
-      window.localStorage.setItem('contacts', JSON.stringify(contacts));
-    }, [contacts])
+    const dispatch = useDispatch();
 
-    const deleteContact = contactId => {
-      setContacts(state => state.filter(contact => contact.id !== contactId))
-  }
+    const contacts = useSelector(state => state.contacts);
+
+    const filter = useSelector(state => state.filter);
+
+    // const [contacts, setContacts] = useLocalStorage('contacts', initialContacts);
+     
+    // const [filter, setFilter] = useState('');
+    
+    // useEffect(() => {
+    //   window.localStorage.setItem('contacts', JSON.stringify(contacts));
+    // }, [contacts])
+
+    const deleteContact = () => dispatch(deleteContact(contacts.id));
 
   const dublicateContact = data => {
     contacts.find(item => item.name === data.name);
@@ -38,14 +45,16 @@ export default function App() {
         ...data
       }
 
-      setContacts([contact, ...contacts]);
+      // setContacts([contact, ...contacts]);
+      dispatch(addContact(contact));
     }
 
     return alert (`${data.name} is already in contacts` )
-    }
+  }
  
   const changeFilter = e => {
-    setFilter(e.currentTarget.value);
+    const filterValue = e.target.value
+     dispatch(setFilter(filterValue));
    }
 
    const visibleContacts = contacts.filter(contact => 

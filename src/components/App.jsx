@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import CardForm from "./phonebook/CardForm";
 import CardList from "./phonebook/CardList";
-import initialContacts from "./phonebook/contacts.json";
 import Filter from "./phonebook/Filter";
 import { nanoid } from "nanoid";
 import { useDispatch, useSelector } from "react-redux";
@@ -31,8 +30,6 @@ export default function App() {
     //   window.localStorage.setItem('contacts', JSON.stringify(contacts));
     // }, [contacts])
 
-    const deleteContact = () => dispatch(deleteContact(contacts.id));
-
   const dublicateContact = data => {
     contacts.find(item => item.name === data.name);
  }
@@ -51,6 +48,10 @@ export default function App() {
 
     return alert (`${data.name} is already in contacts` )
   }
+
+  const deleteContact = id => {
+    dispatch(deleteContact(id));
+ }
  
   const changeFilter = e => {
     const filterValue = e.target.value

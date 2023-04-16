@@ -1,5 +1,5 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
-import { createAction, createReducer, nanoid } from '@reduxjs/toolkit';
+import { createAction, createReducer } from '@reduxjs/toolkit';
 import initialContacts from "../components/phonebook/contacts.json";
 
 export const addContact = createAction("contacts/addContact");

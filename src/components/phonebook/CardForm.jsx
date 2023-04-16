@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { nanoid } from "nanoid";
 import css from "./CardForm.module.css";
-import { useDispatch, useSelector } from 'react-redux';
 
 export default function CardForm({onSubmit}) {
     const [name, setName] = useState('');

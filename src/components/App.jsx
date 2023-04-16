@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import CardForm from "./phonebook/CardForm";
 import CardList from "./phonebook/CardList";
 import Filter from "./phonebook/Filter";
@@ -49,7 +49,7 @@ export default function App() {
     return alert (`${data.name} is already in contacts` )
   }
 
-  const deleteContact = id => {
+  const onDeleteContact = id => {
     dispatch(deleteContact(id));
  }
  
@@ -78,7 +78,7 @@ export default function App() {
         <CardForm onSubmit={formSubmitHandler}/>
         <h2>Contacts</h2>
         <Filter filter={filter} onChangeFilter={changeFilter}/>
-        <CardList contacts={visibleContacts} onDeleteContact={deleteContact}/>
+        <CardList contacts={visibleContacts} onDeleteContact={onDeleteContact}/>
         </div>
       );
 }

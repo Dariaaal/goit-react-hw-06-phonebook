@@ -1,10 +1,10 @@
-import { combineReducers, configureStore } from '@reduxjs/toolkit';
+import { configureStore } from '@reduxjs/toolkit';
 import { createAction, createReducer } from '@reduxjs/toolkit';
 import initialContacts from "../components/phonebook/contacts.json";
 
 export const addContact = createAction("contacts/addContact");
 
-export const deleteContact = createAction('contacts/deleteContact');
+export const deleteContact = createAction("contacts/deleteContact");
 
 export const setFilter = createAction("filter/setFilter");
 

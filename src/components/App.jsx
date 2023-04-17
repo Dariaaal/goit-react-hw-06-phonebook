@@ -6,14 +6,6 @@ import { nanoid } from "nanoid";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteContact, addContact, setFilter } from "../store/store";
 
-// const useLocalStorage = (key, defaultValue) => {
-//   const [state, setState] = useState(() => {
-//     return JSON.parse(window.localStorage.getItem(key)) ?? defaultValue;  
-//   })
-
-//   return [state, setState]
-// }
-
 export default function App() {
     
     const dispatch = useDispatch();
@@ -22,27 +14,19 @@ export default function App() {
 
     const filter = useSelector(state => state.filter);
 
-    // const [contacts, setContacts] = useLocalStorage('contacts', initialContacts);
-     
-    // const [filter, setFilter] = useState('');
-    
-    // useEffect(() => {
-    //   window.localStorage.setItem('contacts', JSON.stringify(contacts));
-    // }, [contacts])
 
-  const dublicateContact = data => {
-    contacts.find(item => item.name === data.name);
- }
 
-  const formSubmitHandler = data =>{
-
-    if (dublicateContact(data)) {
-      return alert (`${data.name} is already in contacts` )
-    }
+  const formSubmitHandler = data => {
 
     const contact = {
       id: nanoid(),
       ...data
+    }
+
+    const dublicateContact = contacts.find(item => item.name === contact.name)
+
+    if (dublicateContact) {
+      return alert (`${data.name} is already in contacts` )
     }
 
     dispatch(addContact(contact));

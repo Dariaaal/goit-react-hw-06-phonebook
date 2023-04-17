@@ -14,8 +14,6 @@ export default function App() {
 
     const filter = useSelector(state => state.filter);
 
-
-
   const formSubmitHandler = data => {
 
     const contact = {

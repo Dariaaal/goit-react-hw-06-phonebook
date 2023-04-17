@@ -36,17 +36,16 @@ export default function App() {
 
   const formSubmitHandler = data =>{
 
-    if (!dublicateContact(data)) {
-      const contact = {
-        id: nanoid(),
-        ...data
-      }
-
-      // setContacts([contact, ...contacts]);
-      dispatch(addContact(contact));
+    if (dublicateContact(data)) {
+      return alert (`${data.name} is already in contacts` )
     }
 
-    return alert (`${data.name} is already in contacts` )
+    const contact = {
+      id: nanoid(),
+      ...data
+    }
+
+    dispatch(addContact(contact));
   }
 
   const onDeleteContact = id => {
